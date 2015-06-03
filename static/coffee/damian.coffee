@@ -47,4 +47,7 @@ oneCycle = (path) ->
 
 this.go = (path) ->
     setInterval (-> oneCycle path), 3000
+    setTimeout (->
+        window.open "/random", "_self"
+    ), 10000
     oneCycle path

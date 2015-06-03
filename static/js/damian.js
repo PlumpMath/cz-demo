@@ -48,6 +48,9 @@
     setInterval((function() {
       return oneCycle(path);
     }), 3000);
+    setTimeout((function() {
+      return window.open("/random", "_self");
+    }), 10000);
     return oneCycle(path);
   };
 

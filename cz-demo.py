@@ -1,17 +1,25 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, redirect
 import os, random
 import logic
 
 app = Flask(__name__)
 
+ALL_PAGES = ['simple', 'hal', 'dots', 'stack', 'blink', 'shift', 'spin']
+
 @app.route('/')
 def index():
     return render_template('index.html',
-                           pages=['simple', 'hal', 'dots', 'stack', 'blink', 'shift', 'spin'])
+                           pages=ALL_PAGES)
 
 @app.route('/page/<name>')
 def page(name):
     return render_template('page.html', name=name)
+
+# A special URL which redirects to a random display page:
+
+@app.route('/random')
+def random_page():
+    return redirect("/page/{name}".format(name=random.choice(ALL_PAGES)))
 
 @app.route('/data/simple/<int:counter>')
 def simple(counter):
