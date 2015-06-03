@@ -50,4 +50,7 @@ def shift(counter):
 def spin(counter):
     return jsonify({'result': logic.makeSpin(counter)})
 
-app.run(host='0.0.0.0', port=8080, debug=True)
+if "DEPLOYED" in os.environ and os.environ["DEPLOYED"] == "yes":
+    print "not starting up Flask"
+else:
+    app.run(host='0.0.0.0', port=8080, debug=True)
