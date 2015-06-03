@@ -10,7 +10,7 @@ The pattern frames are fetched from the (Python) server, which is a rather daft 
 
 - The CoffeeScript sources are in directory `static/coffee`; to automatically compile these into Javascript, install CoffeeScript (`sudo npm install -g coffee-script`) - which might require the `node` command in order to run (via `sudo apt-get install nodejs-legacy`) and then:
 
-        coffee -c -w -o static/__js/ static/coffee/
+        coffee -c -w -o static/js/ static/coffee/
         
   This will auto-watch and compile changed files. (It'll need to be relaunched if any new files are added.) Note that `coffee/*.coffee` works better as a source if you're an Emacs user (otherwise the auto-watch gets confused by Emacs auto-save files).
 
