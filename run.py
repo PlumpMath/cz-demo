@@ -4,9 +4,14 @@ import logic
 
 app = Flask(__name__)
 
+@app.route('/')
+def index():
+    return render_template('index.html',
+                           pages=['simple', 'hal', 'dots', 'stack', 'blink', 'shift', 'spin'])
+
 @app.route('/page/<name>')
 def page(name):
-    return render_template('index.html', name=name)
+    return render_template('page.html', name=name)
 
 @app.route('/data/simple/<int:counter>')
 def simple(counter):
