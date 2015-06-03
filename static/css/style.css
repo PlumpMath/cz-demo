@@ -1,0 +1,20 @@
+body {
+  padding-top: 50px;
+}
+
+/* Paragraphs start off with white text. */
+
+p {
+    font-family: "Zapfino", serif;
+    font-size: 3em;
+    margin-bottom: 1.25em;
+
+    color: #FFFFFF;
+}
+
+div#inner {
+    width: 602px;
+    height: 602px;
+    border: 1px solid black;
+    margin: auto;
+}
