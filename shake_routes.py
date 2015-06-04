@@ -4,9 +4,7 @@ import shake_logic
 
 corpus = shake_logic.filesToDict(['data/' + f for f in os.listdir('data')])
 
-playWords = shake_logic.allPlayWords(corpus)
-
-print("Random play word: " + random.choice(list(playWords)))
+playWords = list(shake_logic.allPlayWords(corpus))
 
 searchWords = ["love", "hate",
                "king", "queen",
@@ -19,6 +17,10 @@ def route(app):
     @app.route('/shakespeare')
     def shakespeare():
         return render_template('shake.html', searchWords=searchWords)
+
+    @app.route('/shakerandom')
+    def shake_random():
+        return jsonify({'result': random.choice(playWords)})
 
     @app.route('/shake/<word>')
     def shake(word):

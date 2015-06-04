@@ -122,7 +122,11 @@ arcTween = (arc) ->
         this._current = i(0)
         (t) -> arc(i t)
 
+timerState =
+    lastTouched: new Date()
+
 $("#type-in").bind 'input', ->
+    timerState.lastTouched = new Date()
     text = $(this).val()
     if text == "" then text = "*BOGUS*"
     go text
@@ -131,6 +135,11 @@ autoGo = (word) ->
     $("#type-in").val word
     go word
 
-setTimeout (->
-    autoGo "love"
-), 10000
+setInterval (->
+    now = new Date()
+    if now - timerState.lastTouched > 5 * 1000
+        d3.json "/shakerandom", (error, json) ->
+            if not error
+                timerState.lastTouched = new Date()
+                autoGo json.result
+), 1000
