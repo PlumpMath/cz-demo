@@ -8,9 +8,9 @@
 
   RADIUS = Math.min(WIDTH, HEIGHT) / 2;
 
-  OUTER_RADIUS = RADIUS - (WIDTH / 10);
+  OUTER_RADIUS = RADIUS - (WIDTH / 50);
 
-  INNER_RADIUS = RADIUS - (WIDTH / 6);
+  INNER_RADIUS = RADIUS - (WIDTH / 15);
 
   color = d3.scale.category20();
 
@@ -59,7 +59,15 @@
       t = "translate(" + (arc.centroid(d)) + ")";
       r = "rotate(" + (angle(d)) + ")";
       return t + r;
-    }).attr("dy", ".35em").style("text-anchor", "middle").text(function(d) {
+    }).attr("dy", ".35em").style("text-anchor", function(d) {
+      var a;
+      a = (d.startAngle + d.endAngle) * 90 / Math.PI;
+      if (a > 180) {
+        return "start";
+      } else {
+        return "end";
+      }
+    }).text(function(d) {
       return d.data.text;
     });
   };
@@ -69,7 +77,15 @@
   };
 
   transitionText = function(data, arc) {
-    return data.select("text").text(function(d) {
+    return data.select("text").style("text-anchor", function(d) {
+      var a;
+      a = (d.startAngle + d.endAngle) * 90 / Math.PI;
+      if (a > 180) {
+        return "start";
+      } else {
+        return "end";
+      }
+    }).text(function(d) {
       if (d.data.value > 0) {
         return d.data.text;
       } else {

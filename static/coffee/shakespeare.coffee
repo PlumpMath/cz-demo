@@ -4,8 +4,8 @@ WIDTH = 600
 HEIGHT = 600
 RADIUS = Math.min(WIDTH, HEIGHT) / 2
 
-OUTER_RADIUS = RADIUS - (WIDTH / 10)
-INNER_RADIUS = RADIUS - (WIDTH / 6)
+OUTER_RADIUS = RADIUS - (WIDTH / 50)
+INNER_RADIUS = RADIUS - (WIDTH / 15)
 
 color = d3.scale.category20()
 
@@ -50,8 +50,11 @@ createText = (g, arc) ->
             r = "rotate(#{angle d})"
             t + r
         .attr "dy", ".35em"
-        .style "text-anchor", "middle"
-        .text (d) -> d.data.text
+        .style "text-anchor", (d) ->
+            a = (d.startAngle + d.endAngle) * 90 / Math.PI
+            if a > 180 then "start" else "end"
+        .text (d) ->
+            d.data.text
 
 transitionArcs = (data, arc) ->
     data.select "path"
@@ -62,6 +65,9 @@ transitionArcs = (data, arc) ->
 
 transitionText = (data, arc) ->
     data.select "text"
+        .style "text-anchor", (d) ->
+            a = (d.startAngle + d.endAngle) * 90 / Math.PI
+            if a > 180 then "start" else "end"
         .text (d) ->
             if  d.data.value > 0
                 d.data.text
