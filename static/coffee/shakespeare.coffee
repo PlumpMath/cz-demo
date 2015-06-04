@@ -125,11 +125,11 @@ this.go = (word) ->
 arcTween = (arc) ->
     (a) ->
         i = d3.interpolate this._current, a
-        this._current = i(0)
+        this._current = i 0
         (t) -> arc(i t)
 
 timerState =
-    lastTouched: new Date()
+    lastTouched: new Date 0
 
 $("#type-in").bind 'input', ->
     timerState.lastTouched = new Date()

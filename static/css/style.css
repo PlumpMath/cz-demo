@@ -15,6 +15,10 @@ p {
 div#inner {
     width: 602px;
     height: 602px;
-    border: 1px solid black;
+    border: 1px solid #808080;
     margin: auto;
+}
+
+div.gap {
+    margin-top: 2em;
 }

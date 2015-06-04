@@ -137,7 +137,7 @@
   };
 
   timerState = {
-    lastTouched: new Date()
+    lastTouched: new Date(0)
   };
 
   $("#type-in").bind('input', function() {
