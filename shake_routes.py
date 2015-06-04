@@ -4,6 +4,10 @@ import shake_logic
 
 corpus = shake_logic.filesToDict(['data/' + f for f in os.listdir('data')])
 
+playWords = shake_logic.allPlayWords(corpus)
+
+print("Random play word: " + random.choice(list(playWords)))
+
 searchWords = ["love", "hate",
                "king", "queen",
                "country", "kingdom",

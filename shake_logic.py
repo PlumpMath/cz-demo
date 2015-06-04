@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, re
 
 def filesToDict(listOfFiles):
 	'''
@@ -39,6 +39,27 @@ def freqAnalyzer(fullWorksDict, keyword):
 
 	# alternative, more pythonic solution:
 	#return {opusName: content.lower().count(keyword.lower()) for opusName, content in fullWorksDict.items()}
+
+def allWordsFromString(str):
+        """
+        Pull out all words from a string, ignore punctuation, force to lower case.
+        >>> sorted(list(allWordsFromString('a b c a')))
+        ['a', 'b', 'c']
+        >>> sorted(list(allWordsFromString('C a.b.C.d; c ')))
+        ['a', 'b', 'c', 'd']
+        """
+        return set(re.findall("\w+", str.lower()))
+
+def allWordsFromStrings(*strs):
+        """
+        >>> sorted(list(allWordsFromStrings('a b c a', 'z y', ' a ')))
+        ['a', 'b', 'c', 'y', 'z']
+        """
+        return reduce(lambda s1, s2: s1.union(s2),
+                      map(allWordsFromString, strs))
+
+def allPlayWords(corpus):
+        return allWordsFromStrings(*(corpus.values()))
 
 def main():
         '''
