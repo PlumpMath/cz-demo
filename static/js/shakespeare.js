@@ -107,6 +107,8 @@
       if (error) {
         return console.warn(error);
       } else {
+        console.log("TOTAL: " + (totalCount(json.result)));
+        $("#count").text("" + (totalCount(json.result)));
         if ((totalCount(json.result)) === 0) {
           svg.selectAll(".arc path").transition().duration(500).attr("fill-opacity", "0.0");
           return svg.selectAll(".arc text").transition().duration(500).attr("fill-opacity", "0.0");
@@ -145,7 +147,7 @@
     timerState.lastTouched = new Date();
     text = $(this).val();
     if (text === "") {
-      text = "*BOGUS*";
+      text = "BOGUS";
     }
     return go(text);
   });
@@ -155,17 +157,21 @@
     return go(word);
   };
 
-  setInterval((function() {
-    var now;
-    now = new Date();
-    if (now - timerState.lastTouched > 5 * 1000) {
-      return d3.json("/shakerandom", function(error, json) {
-        if (!error) {
-          timerState.lastTouched = new Date();
-          return autoGo(json.result);
-        }
-      });
-    }
-  }), 1000);
+  $("#count").text("");
+
+  if (false) {
+    setInterval((function() {
+      var now;
+      now = new Date();
+      if (now - timerState.lastTouched > 5 * 1000) {
+        return d3.json("/shakerandom", function(error, json) {
+          if (!error) {
+            timerState.lastTouched = new Date();
+            return autoGo(json.result);
+          }
+        });
+      }
+    }), 1000);
+  }
 
 }).call(this);

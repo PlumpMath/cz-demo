@@ -33,7 +33,8 @@ def freqAnalyzer(fullWorksDict, keyword):
 		text = fullWorksDict[title]
 		text = text.lower()
 		keyword = keyword.lower()
-		freq = text.count(keyword)
+		#freq = text.count(keyword)
+                freq = len(re.findall(r"\b"+keyword+r"\b", text))
 		resultsDict[title] = freq
 	return resultsDict
 

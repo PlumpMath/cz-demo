@@ -90,6 +90,9 @@ this.go = (word) ->
         if error
             console.warn error
         else
+            console.log "TOTAL: #{totalCount json.result}"
+            $("#count").text "#{totalCount json.result}"
+
             if (totalCount json.result) == 0
                 svg.selectAll ".arc path"
                     .transition()
@@ -134,18 +137,21 @@ timerState =
 $("#type-in").bind 'input', ->
     timerState.lastTouched = new Date()
     text = $(this).val()
-    if text == "" then text = "*BOGUS*"
+    if text == "" then text = "BOGUS"
     go text
 
 autoGo = (word) ->
     $("#type-in").val word
     go word
 
-setInterval (->
-    now = new Date()
-    if now - timerState.lastTouched > 5 * 1000
-        d3.json "/shakerandom", (error, json) ->
-            if not error
-                timerState.lastTouched = new Date()
-                autoGo json.result
-), 1000
+$("#count").text ""
+
+if false
+    setInterval (->
+        now = new Date()
+        if now - timerState.lastTouched > 5 * 1000
+            d3.json "/shakerandom", (error, json) ->
+                if not error
+                    timerState.lastTouched = new Date()
+                    autoGo json.result
+    ), 1000

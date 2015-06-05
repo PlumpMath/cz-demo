@@ -35,7 +35,7 @@
              type="button"
              class="btn btn-default btn-sm"
              onClick="go('{{ i }}')">
-            <span>{{ i }}</span>
+            <B><span>{{ i }}</span></B>
           </button>
         </div>
         {% endfor %}
@@ -45,6 +45,9 @@
       <div class="row gap">
         <div class="col-md-2 col-md-offset-5">
           <input id="type-in" />
+        </div>
+        <div class="col-md-2 col-md-offset-5">
+          TOTAL: <B><span id="count" /></B>
         </div>
       </div>
 
